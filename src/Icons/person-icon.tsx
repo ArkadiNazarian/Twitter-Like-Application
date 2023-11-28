@@ -1,5 +1,5 @@
-export const PersonIcon = () => (
-    <svg width="120" height="120" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg"  xmlnsXlink="http://www.w3.org/1999/xlink">
+export const PersonIcon = (props:any) => (
+    <svg width="120" {...props} height="120" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg"  xmlnsXlink="http://www.w3.org/1999/xlink">
         <mask id="mask0_18_460"  maskUnits="userSpaceOnUse" x="0" y="0" width="120" height="120">
             <circle cx="60" cy="60" r="60" fill="#C4C4C4" />
         </mask>

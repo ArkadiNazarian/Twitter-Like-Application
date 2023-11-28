@@ -13,10 +13,10 @@ export const useContainer = (): IFormModel => {
 
     const [loading, set_loading] = useState<boolean>(false);
 
-    const initial_values:IModel = {
+    const initial_values: IModel = {
         email: "",
         password: "",
-        
+
     };
 
     const validation_schema = yup.object().shape({
@@ -25,8 +25,17 @@ export const useContainer = (): IFormModel => {
     });
 
     const action_submit = (values: IModel) => {
-        console.log(values)
-        
+        axios({
+            method: "Post",
+            url: `https://rn-api.codebnb.me/api/user/sign-in/`,
+            responseType: "json",
+            data: {
+                email: 'example@gmail.com',
+                password: 'Example11!',
+            }
+        }).then((result) => {
+            console.log(result)
+        })
     }
 
     const formik = useFormik({

@@ -1,4 +1,3 @@
-import { Link } from "react-router-dom";
 import { PersonIcon } from "../../../Icons/person-icon";
 import { IFormModel } from "./model";
 
@@ -10,7 +9,7 @@ export const View = (props: IFormModel) => (
             <form className="tw-ml-[2.26vw] tw-flex tw-justify-center tw-flex-col tw-items-center">
                 <div className=" tw-mb-[4vh]">
                     <p className="tw-mt-[2vh] tw-text-custom_light_blue tw-text-4xl tw-mb-[4vh]">Sign Up</p>
-                    <PersonIcon />
+                    <PersonIcon onClick={()=>props.inputRef.current.click()}/>
                 </div>
                 <div className="tw-flex tw-gap-[1.104vw] tw-mb-[2vh]">
                     <div className="tw-flex tw-flex-col">
@@ -19,7 +18,7 @@ export const View = (props: IFormModel) => (
                             name="first_name"
                             value={props.form_data.first_name}
                             onChange={props.handleChange}
-                            onBlur={props.handleBlur}
+                           
                             placeholder="First name"
                             className={`${props.form_errors.first_name ? "tw-border-custom_dark_red tw-outline-custom_dark_red tw-bg-custom_white tw-placeholder-custom_dark_red" : "tw-border-custom_light_blue tw-outline-custom_blue"} tw-py-[0.7vh] tw-px-[0.893vw] tw-border-2 tw-rounded-2xl tw-w-[17.867vw]`}
                         />
@@ -33,7 +32,7 @@ export const View = (props: IFormModel) => (
                             name="last_name"
                             value={props.form_data.last_name}
                             onChange={props.handleChange}
-                            onBlur={props.handleBlur}
+                           
                             placeholder="Last name"
                             className={`${props.form_errors.last_name ? "tw-border-custom_dark_red tw-outline-custom_dark_red tw-bg-custom_white tw-placeholder-custom_dark_red" : "tw-border-custom_light_blue tw-outline-custom_blue"} tw-border-2 tw-py-[0.7vh] tw-px-[0.893vw] tw-rounded-2xl tw-w-[17.867vw]`}
                         />
@@ -49,7 +48,7 @@ export const View = (props: IFormModel) => (
                         name="email"
                         value={props.form_data.email}
                         onChange={props.handleChange}
-                        onBlur={props.handleBlur}
+                       
                         placeholder="Email"
                         className={`${props.form_errors.email ? "tw-border-custom_dark_red tw-outline-custom_dark_red tw-bg-custom_white tw-placeholder-custom_dark_red" : "tw-border-custom_light_blue tw-outline-custom_blue"} tw-mr-[19vw] tw-border-2 tw-py-[0.7vh] tw-px-[0.893vw] tw-rounded-2xl tw-w-[17.867vw]`}
                     />
@@ -64,7 +63,7 @@ export const View = (props: IFormModel) => (
                             name="password"
                             value={props.form_data.password}
                             onChange={props.handleChange}
-                            onBlur={props.handleBlur}
+                           
                             placeholder="Password"
                             className={`${props.form_errors.password ? "tw-border-custom_dark_red tw-outline-custom_dark_red tw-bg-custom_white tw-placeholder-custom_dark_red" : " tw-border-custom_light_blue tw-outline-custom_blue"} tw-border-2 tw-py-[0.7vh] tw-px-[0.893vw] tw-rounded-2xl tw-w-[17.867vw]`}
                         />
@@ -78,7 +77,6 @@ export const View = (props: IFormModel) => (
                             name="confirm_password"
                             value={props.form_data.confirm_password}
                             onChange={props.handleChange}
-                            onBlur={props.handleBlur}
                             placeholder="Custom password"
                             className={`${props.form_errors.confirm_password ? "tw-border-custom_dark_red tw-outline-custom_dark_red tw-bg-custom_white tw-placeholder-custom_dark_red" : "tw-border-custom_light_blue tw-outline-custom_blue"} tw-border-2 tw-py-[0.7vh] tw-px-[0.893vw] tw-rounded-2xl tw-w-[17.867vw]`}
                         />
@@ -93,7 +91,12 @@ export const View = (props: IFormModel) => (
                     <p className="tw-text-custom_light_blue tw-cursor-pointer" onClick={() => props.go_to_signin()}>Login</p>
                 </div>
             </form>
-
+            <input
+                className="tw-hidden"
+                type="file"
+                ref={props.inputRef}
+                onChange={(e: any) => props.handleonChnageUploadFile(e)}
+            />
         </div>
     </div>
 )

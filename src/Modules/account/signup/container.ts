@@ -4,14 +4,16 @@ import *as yup from 'yup';
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { route_names } from "../../../Routes/route-names";
-import { useState } from "react";
+import { useRef, useState } from "react";
+import { toast } from "react-toastify";
 
 export const useContainer = (): IFormModel => {
 
     const navigator = useNavigate();
     const app_routes = route_names();
+    const inputRef = useRef<HTMLInputElement>(null)
 
-    const [loading, set_loading] = useState<boolean>(false);
+    const [uploaded_file, set_uploaded_file] = useState<any>();
 
     const initial_values: IModel = {
         first_name: "",
@@ -23,28 +25,28 @@ export const useContainer = (): IFormModel => {
 
     const validation_schema = yup.object().shape({
         email: yup.string().email("Invalid email format").required("This field is required"),
-        password: yup.string().min(4, "Too short").required("This field is required"),
+        password: yup.string().min(6, "Too short").required("This field is required"),
         first_name: yup.string().required("This field is required"),
         last_name: yup.string().required("This field is required"),
         confirm_password: yup.string().oneOf([yup.ref('password')], 'Passwords must match').required("This field is required"),
     });
 
     const action_submit = (values: IModel) => {
-        console.log(values)
-        axios({
-            method: "Post",
-            url: `https://rn-api.codebnb.me/api/user/sign-up`,
-            responseType: "json",
-            data: {
-                first_name: 'Example',
-                last_name: 'last_name',
-                email: 'example@gmail.com',
-                password: 'Example11!',
-                confirm_password: 'Example11!',
-                src: '/home/stdev/Pictures/01.png'
-            } as IModel
-        }).then((result) => {
-            console.log(result)
+        const formData = new FormData()
+        const imageFile = new File([uploaded_file], '01.png');
+        formData.append('first_name', values.first_name)
+        formData.append('last_name', values.last_name)
+        formData.append('password', values.password)
+        formData.append('email', values.email)
+        formData.append('image', imageFile);
+
+        axios.post('https://rn-api.codebnb.me/api/user/sign-up/', formData).then((result) => {
+            navigator('/signin')
+        }).catch((error)=>{
+            console.log(error)
+            toast.error('Please try again', {
+                position: toast.POSITION.TOP_RIGHT
+            })
         })
     }
 
@@ -66,14 +68,17 @@ export const useContainer = (): IFormModel => {
         navigator('/signin')
     }
 
+    const handleonChnageUploadFile = (e: any) => {
+        set_uploaded_file(e.target.files[0])
+    }
+
     return {
         action_submit: formik.handleSubmit,
         form_data: formik.values,
         form_errors: form_errors,
         handleChange: formik.handleChange,
-        sign_in: app_routes.signin_path,
-        handleBlur: formik.handleBlur,
-        loading,
-        go_to_signin
+        go_to_signin,
+        inputRef,
+        handleonChnageUploadFile
     }
 }

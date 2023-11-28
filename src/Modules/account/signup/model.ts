@@ -13,8 +13,7 @@ export interface IFormModel {
     form_data: IModel;
     form_errors: FormikErrors<IModel>;
     handleChange: (e: any) => void;
-    sign_in: string;
-    handleBlur: (e: any) => void;
-    loading: boolean;
     go_to_signin: () => void;
+    inputRef: any;
+    handleonChnageUploadFile: (e: any) => void;
 }
