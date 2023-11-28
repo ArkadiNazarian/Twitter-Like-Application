@@ -1,25 +1,31 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import './index.css';
+import { Signup } from './Modules/account/signup';
+import { SignIn } from './Modules/account/signin';
 
 function App() {
+  
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <BrowserRouter>
+      <Routes>
+        {/* <Route element={<PrivateRoutes />}>
+          {
+            app_routes.private_routes.map((value, index) => (
+              <Route path={value.path} element={value.component} key={index} />
+            ))
+          }
+        </Route>
+        <Route element={<PublicRoutes />}>
+          {
+            app_routes.public_routes.map((value, index) => (
+              <Route path={value.path} element={value.component} key={index} />
+            ))
+          }
+        </Route> */}
+        <Route path={"/signup"} element={<Signup/>}/>
+        <Route path={"/signin"} element={<SignIn/>}/>
+      </Routes>
+    </BrowserRouter>
   );
 }
 
