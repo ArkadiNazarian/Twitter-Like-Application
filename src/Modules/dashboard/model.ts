@@ -24,6 +24,8 @@ export interface IModel {
     handleonChnageUploadFile: (e: any) => void;
     image?: string;
     image_required?: string;
+    go_to_edit_post: (id: number) => void;
+    action_delete_post: (id: number) => void;
 }
 
 export interface IPostModel {
@@ -40,7 +42,7 @@ export interface IPostModel {
         name: string;
         slug: string;
     }
-    
+
 }
 
 export interface IFormModel {

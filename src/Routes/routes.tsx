@@ -1,4 +1,5 @@
 import { Dashboard } from "../Modules/dashboard";
+import { EditPost } from "../Modules/editPost";
 import { SignIn } from "../Modules/signin";
 import { Signup } from "../Modules/signup";
 import { route_names } from "./route-names";
@@ -39,10 +40,10 @@ export const routes = () => {
             path: app_routes.default_path,
             component: <Dashboard />
         },
-        // {
-        //     path: app_routes.edit_account,
-        //     component: <EditAccount />
-        // },
+        {
+            path: app_routes.show_post,
+            component: <EditPost />
+        },
         // {
         //     path: app_routes.products,
         //     component: <Products />

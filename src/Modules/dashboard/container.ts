@@ -166,6 +166,23 @@ export const useContainer = (): IModel => {
     set_image(URL.createObjectURL(e.target.files[0]))
   }
 
+  const go_to_edit_post = (id: number) => {
+    navigator(`/post/${id}`)
+  }
+
+  const action_delete_post = (id: number) => {
+    axios_config.delete(`/api/post/crud/${id}/`).then((result) => {
+      toast.success('Post is deleted successfully', {
+        position: toast.POSITION.TOP_RIGHT
+      })
+      handler_select_category(select_category!)
+    }).catch(()=>{
+      toast.error('Please try again', {
+        position: toast.POSITION.TOP_RIGHT
+      })
+    })
+  }
+
   return {
     user_full_name: {
       first_name: user_details_store.first_name,
@@ -189,6 +206,8 @@ export const useContainer = (): IModel => {
     inputRef,
     handleonChnageUploadFile,
     image,
-    image_required
+    image_required,
+    go_to_edit_post,
+    action_delete_post
   }
 }

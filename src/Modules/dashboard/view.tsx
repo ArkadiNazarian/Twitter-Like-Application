@@ -103,7 +103,7 @@ export const View = (props: IModel) => (
             <div className="tw-flex tw-flex-row tw-flex-wrap tw-gap-[2vw]">
                 {
                     props.posts?.map((value) => (
-                        <div key={value.id} className="tw-flex tw-justify-between tw-shadow-md tw-w-[29.375vw]">
+                        <div key={value.id} className="tw-flex tw-justify-between tw-shadow-md tw-w-[29.375vw]" >
                             <div className="tw-flex">
                                 <div>
                                     <img src={value.image} alt={`${value.title}`} className="tw-w-[10.51vw] tw-h-[200px] tw-rounded-md tw-mr-[1vw]" />
@@ -118,8 +118,8 @@ export const View = (props: IModel) => (
                                 </div>
                             </div>
                             <div className="tw-flex tw-gap-[1.051vw] tw-pt-[1.5vh] tw-pr-[1vw]">
-                                <EditIcon className="tw-cursor-pointer" />
-                                <DeleteIcon className="tw-cursor-pointer" />
+                                <EditIcon className="tw-cursor-pointer" onClick={()=>props.go_to_edit_post(value.id)}/>
+                                <DeleteIcon className="tw-cursor-pointer" onClick={()=>props.action_delete_post(value.id)}/>
                             </div>
                         </div>
                     ))
