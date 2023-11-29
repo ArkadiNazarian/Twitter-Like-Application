@@ -3,7 +3,6 @@ import { axios_config } from "../../Axios/setup-axions";
 import { useAccessTokenStore } from "../../Zustand/access-token";
 import { useRefreshTokenStore } from "../../Zustand/refresh-token";
 import { useUserDetailsStore } from "../../Zustand/user-details";
-import axios from "axios";
 import { useEffect, useState } from "react";
 import { IPostModel } from "./model";
 
@@ -15,25 +14,15 @@ export const useContainer = () => {
   const access_token_store = useAccessTokenStore();
   const [categories, set_categories] = useState<Array<{ id: number; name: string; slug: string; }>>();
   const [select_category, set_select_category] = useState<number>();
-  const [posts, set_posts] = useState<Array<IPostModel>>()
-
-  // axios.get('https://rn-api.codebnb.me/api/user/me/', {
-  //     headers: {
-  //       Authorization: `JWT ${access_token.token}`
-  //     }
-  //   })
-  //     .then(response => {
-  //       console.log(response.data);
-  //     })
-  //     .catch(error => {
-  //       console.error(error);
-  //     });
+  const [posts, set_posts] = useState<Array<IPostModel>>();
+  const [posts_count, set_posts_count] = useState<number>()
 
   useEffect(() => {
 
     if (access_token_store.token) {
       axios_config.get('/api/category/').then((result) => {
         set_categories(result.data)
+        set_posts(undefined)
       }).catch((error) => {
         // handle error
         console.log(error)
@@ -59,7 +48,7 @@ export const useContainer = () => {
     set_select_category(id)
     if (id) {
       axios_config.get('/api/post/crud/').then((result) => {
-
+        set_posts_count(result.data.count)
         const filter_results = result.data.results.filter((value: any) => value.category.id === id)
 
         set_posts(filter_results)
@@ -70,6 +59,23 @@ export const useContainer = () => {
     }
   }
 
+  const onChangePagination = (page: number) => {
+    if (page - 1 === 0) {
+      handler_select_category(select_category!)
+    } else {
+      axios_config.get(`/api/post/crud/?limit=5&offset=${(page - 1) * 5}`).then((result) => {
+        const filter_results = result.data.results.filter((value: any) => value.category.id === select_category)
+
+        set_posts(filter_results)
+      }).catch((error) => {
+        // handle error
+        console.log(error)
+      })
+    }
+
+  }
+
+  console.log(posts)
 
   return {
     user_full_name: {
@@ -80,6 +86,8 @@ export const useContainer = () => {
     categories,
     select_category,
     handler_select_category,
-    posts
+    posts,
+    onChangePagination,
+    posts_count
   }
 }

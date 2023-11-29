@@ -8,6 +8,8 @@ export interface IModel {
     select_category?: number;
     handler_select_category: (id: number) => void;
     posts?: Array<IPostModel>;
+    onChangePagination: (page: number) => void;
+    posts_count?: number;
 }
 
 export interface IPostModel {

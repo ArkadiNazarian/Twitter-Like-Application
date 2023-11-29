@@ -3,14 +3,12 @@ import { IFormModel, IModel } from "./model";
 import *as yup from 'yup';
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import { route_names } from "../../Routes/route-names";
 import { useRef, useState } from "react";
 import { toast } from "react-toastify";
 
 export const useContainer = (): IFormModel => {
 
     const navigator = useNavigate();
-    const app_routes = route_names();
     const inputRef = useRef<HTMLInputElement>(null)
 
     const [uploaded_file, set_uploaded_file] = useState<any>();
