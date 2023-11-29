@@ -1,15 +1,24 @@
 import { PersonIcon } from "../../Icons/person-icon";
-import { IFormModel } from "./model";
+import { IModel } from "./model";
 
 
-export const View = (props: IFormModel) => (
+export const View = (props: IModel) => (
     <div className="tw-bg-custom_blue tw-h-screen tw-flex tw-items-center tw-justify-center">
         <div className="tw-bg-white tw-w-[41.04vw] tw-flex tw-flex-col tw-rounded-2xl">
 
             <form className="tw-ml-[2.26vw] tw-flex tw-justify-center tw-flex-col tw-items-center">
                 <div className=" tw-mb-[4vh]">
                     <p className="tw-mt-[2vh] tw-text-custom_light_blue tw-text-4xl tw-mb-[4vh]">Sign Up</p>
-                    <PersonIcon onClick={()=>props.inputRef.current.click()}/>
+                    
+                         {
+                            props.image ? <div ><img src={props.image} alt='placeholder' className="tw-w-[6.306vw] tw-h-[6.306vw] tw-rounded-full" /></div> : <div className="tw-flex tw-flex-col tw-justify-center tw-items-center">
+                                <PersonIcon className={`${props.image_required && "tw-border-custom_dark_red tw-border-2 tw-rounded-full"}`} onClick={() => props.inputRef.current.click()} />
+                                {
+                                    props.image_required && <p className="tw-text-custom_dark_red">This field is required</p>
+                                }
+                            </div>
+                        }
+                    
                 </div>
                 <div className="tw-flex tw-gap-[1.104vw] tw-mb-[2vh]">
                     <div className="tw-flex tw-flex-col">
@@ -85,8 +94,8 @@ export const View = (props: IFormModel) => (
                         }
                     </div>
                 </div>
-                <button className="tw-bg-custom_light_blue tw-text-white tw-py-[1vh] tw-px-[3.678vw] tw-rounded-lg" onClick={props.action_submit}>Signup</button>
-                <div className="tw-flex tw-items-center tw-mt-[2vh]">
+                <button type="button" className="tw-bg-custom_light_blue tw-text-white tw-py-[1vh] tw-px-[3.678vw] tw-rounded-lg" onClick={props.action_submit}>Signup</button>
+                <div className="tw-flex tw-items-center tw-mt-[2vh] tw-mb-[6vh]">
                     <p>Already have an account ?</p>
                     <p className="tw-text-custom_light_blue tw-cursor-pointer" onClick={() => props.go_to_signin()}>Login</p>
                 </div>

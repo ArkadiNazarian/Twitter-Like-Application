@@ -169,7 +169,7 @@ export const useContainer = (): IModel => {
       set_uploaded_file(undefined)
       set_image(undefined)
     }
-  }, [open_add_post, formik])
+  }, [open_add_post])
 
   return {
     user_full_name: {

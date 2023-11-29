@@ -16,8 +16,6 @@ export const useContainer = (): IFormModel => {
     const access_token_store = useAccessTokenStore();
     const refresh_token_store = useRefreshTokenStore();
 
-    const [loading, set_loading] = useState<boolean>(false);
-
     const initial_values: IModel = {
         email: "",
         password: "",
@@ -72,7 +70,6 @@ export const useContainer = (): IFormModel => {
         handleChange: formik.handleChange,
         sign_in: app_routes.signin_path,
         handleBlur: formik.handleBlur,
-        loading,
         go_to_signup
     }
 }

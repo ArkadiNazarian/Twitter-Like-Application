@@ -47,7 +47,7 @@ export const View = (props: IFormModel) => (
                     />
                     <p>Remember me</p>
                 </div>
-                <button className="tw-bg-custom_light_blue tw-text-white tw-py-[1vh] tw-px-[3.678vw] tw-rounded-lg" onClick={props.action_submit}>LogIn</button>
+                <button type="button" className="tw-bg-custom_light_blue tw-text-white tw-py-[1vh] tw-px-[3.678vw] tw-rounded-lg" onClick={props.action_submit}>LogIn</button>
                 <div className="tw-flex tw-items-center tw-mt-[2vh] tw-mb-[6vh]">
                     <p>Need an account ?</p>
                     <p className="tw-text-custom_light_blue tw-cursor-pointer" onClick={() => props.go_to_signup()}>SignUp</p>

@@ -1,6 +1,6 @@
 import { FormikErrors } from "formik";
 
-export interface IModel {
+export interface IFormModel {
     first_name: string;
     last_name: string;
     email: string;
@@ -8,12 +8,14 @@ export interface IModel {
     confirm_password: string;
 }
 
-export interface IFormModel {
+export interface IModel {
     action_submit: () => void;
-    form_data: IModel;
-    form_errors: FormikErrors<IModel>;
+    form_data: IFormModel;
+    form_errors: FormikErrors<IFormModel>;
     handleChange: (e: any) => void;
     go_to_signin: () => void;
     inputRef: any;
     handleonChnageUploadFile: (e: any) => void;
+    image_required?: string;
+    image?: string;
 }

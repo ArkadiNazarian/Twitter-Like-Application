@@ -12,7 +12,7 @@ import { axios_config } from './Axios/setup-axions';
 const access_token = JSON.parse(localStorage.getItem('arkadi-project-access-token')!);
 const refresh_token = JSON.parse(localStorage.getItem('arkadi-project-refresh-token')!);
 
-setupAxios(axios_config, access_token.state.token, refresh_token.state.token)
+setupAxios(axios_config, access_token.state.token, refresh_token.state.refresh_token)
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement

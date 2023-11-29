@@ -12,6 +12,5 @@ export interface IFormModel {
     handleChange: (e: any) => void;
     sign_in: string;
     handleBlur: (e: any) => void;
-    loading: boolean;
     go_to_signup: () => void;
 }
