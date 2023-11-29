@@ -7,14 +7,14 @@ import { route_names } from "../../Routes/route-names";
 import { useState } from "react";
 import { toast } from "react-toastify";
 import { useAccessTokenStore } from "../../Zustand/access-token";
-import { useUserDetailsStore } from "../../Zustand/user-details";
+import { useRefreshTokenStore } from "../../Zustand/refresh-token";
 
 export const useContainer = (): IFormModel => {
 
     const navigator = useNavigate();
     const app_routes = route_names();
     const access_token_store = useAccessTokenStore();
-    const user_details_store = useUserDetailsStore();
+    const refresh_token_store = useRefreshTokenStore();
 
     const [loading, set_loading] = useState<boolean>(false);
 
@@ -36,12 +36,12 @@ export const useContainer = (): IFormModel => {
             url: `https://rn-api.codebnb.me/api/user/sign-in/`,
             responseType: "json",
             data: {
-                email: 'example@gmail.com',
-                password: 'Example11!',
+                email: values.email,
+                password: values.password,
             }
         }).then((result) => {
             access_token_store.set_token(result.data.token.access)
-            user_details_store.set_user_details(result.data.user.email, result.data.user.id, result.data.user.image, result.data.user.first_name, result.data.user.last_name)
+            refresh_token_store.set_refresh_token(result.data.token.refresh)
             navigator('/dashboard')
         }).catch(() => {
             toast.error('Wrong password or email', {

@@ -5,6 +5,14 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer } from 'react-toastify';
+import setupAxios from './Axios/axios-config';
+import { axios_config } from './Axios/setup-axions';
+
+
+const access_token = JSON.parse(localStorage.getItem('arkadi-project-access-token')!);
+const refresh_token = JSON.parse(localStorage.getItem('arkadi-project-refresh-token')!);
+
+setupAxios(axios_config,access_token.state.token)
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
