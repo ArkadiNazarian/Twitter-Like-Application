@@ -29,7 +29,7 @@ export const useContainer = (): IModel => {
 
     return {
         action_logout,
-        user_full_name: {
+        user_profile_detials: {
             first_name: user_details_store.first_name,
             last_name: user_details_store.last_name,
             image:user_details_store.image

@@ -16,7 +16,7 @@ export const View = (props: IModel) => (
                     <div className=" tw-flex tw-flex-col tw-items-center">
                         <p className="tw-mt-[2vh] tw-text-custom_light_blue tw-text-4xl tw-mb-[4vh]">Add post</p>
                         {
-                            props.image ? <div ><img src={props.image} alt='image' className="tw-w-[10.51vw] tw-h-[10.51vw]" /></div> : <div ><ImagePlaceHolder className={`${props.image_required && "tw-border-custom_dark_red tw-border-2 tw-rounded-2xl"}`} onClick={() => props.inputRef.current.click()} />
+                            props.image ? <div ><img src={props.image} alt='placeholder' className="tw-w-[10.51vw] tw-h-[10.51vw]" /></div> : <div ><ImagePlaceHolder className={`${props.image_required && "tw-border-custom_dark_red tw-border-2 tw-rounded-2xl"}`} onClick={() => props.inputRef.current.click()} />
                                 {
                                     props.image_required && <p className="tw-text-custom_dark_red">This field is required</p>
                                 }
@@ -56,7 +56,7 @@ export const View = (props: IModel) => (
 
                     <div className="tw-flex tw-flex-col tw-mb-[2vh] ">
                         <Dropdown>
-                            <InputLabel id="select-label">Age</InputLabel>
+                            <InputLabel id="select-label">Category</InputLabel>
                             <Select
                                 labelId="select-label"
                                 id="select"
@@ -89,17 +89,8 @@ export const View = (props: IModel) => (
 
             </div>
         </Modal>
+        <p className="tw-text-custom_blue tw-text-2xl tw-cursor-pointer" onClick={() => props.handler_open_close_modal()}>+Add post</p>
         <div className="tw-flex tw-mt-[4vh] tw-gap-[4vw]">
-
-            <div>
-                <p className="tw-text-custom_blue tw-text-2xl">Categories</p>
-                {
-                    props.categories?.map((value) => (
-                        <p key={value.id} onClick={() => props.handler_select_category(value.id)} className={`tw-cursor-pointer tw-min-w-max tw-m-[1vw] ${props.select_category === value.id && "tw-text-custom_blue tw-font-bold"}`}>{value.name}</p>
-                    ))
-                }
-                <p className="tw-text-custom_blue tw-text-2xl" onClick={() => props.handler_open_close_modal()}>+Add post</p>
-            </div>
             <div className="tw-flex tw-flex-row tw-flex-wrap tw-gap-[2vw]">
                 {
                     props.posts?.map((value) => (
@@ -118,8 +109,8 @@ export const View = (props: IModel) => (
                                 </div>
                             </div>
                             <div className="tw-flex tw-gap-[1.051vw] tw-pt-[1.5vh] tw-pr-[1vw]">
-                                <EditIcon className="tw-cursor-pointer" onClick={()=>props.go_to_edit_post(value.id)}/>
-                                <DeleteIcon className="tw-cursor-pointer" onClick={()=>props.action_delete_post(value.id)}/>
+                                <EditIcon className="tw-cursor-pointer" onClick={() => props.go_to_edit_post(value.id)} />
+                                <DeleteIcon className="tw-cursor-pointer" onClick={() => props.action_delete_post(value.id)} />
                             </div>
                         </div>
                     ))
@@ -127,7 +118,7 @@ export const View = (props: IModel) => (
             </div>
 
         </div>
-        <div className="tw-flex tw-justify-center tw-mt-[4vh]">
+        <div className="tw-flex tw-justify-center tw-mt-[12vh]">
             {
                 props.posts && props.posts.length > 0 && <Pagination variant="outlined" shape="rounded" color="primary" count={Math.ceil(props.posts_count! / 5)} onChange={(e, value) => props.onChangePagination(value)} />
             }

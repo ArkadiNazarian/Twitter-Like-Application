@@ -7,8 +7,6 @@ export interface IModel {
     };
     action_logout: () => void;
     categories?: Array<{ id: number; name: string; slug: string; }>;
-    select_category?: number;
-    handler_select_category: (id: number) => void;
     posts?: Array<IPostModel>;
     onChangePagination: (page: number) => void;
     posts_count?: number;
@@ -19,7 +17,6 @@ export interface IModel {
     form_data: IFormModel;
     form_errors: FormikErrors<IFormModel>;
     handleChange: (e: any) => void;
-    go_to_signin: () => void;
     inputRef: any;
     handleonChnageUploadFile: (e: any) => void;
     image?: string;

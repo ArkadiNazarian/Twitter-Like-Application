@@ -15,10 +15,14 @@ export const useContainer = (): IModel => {
   const user_details_store = useUserDetailsStore();
   const refresh_token_store = useRefreshTokenStore();
   const access_token_store = useAccessTokenStore();
+  const inputRef = useRef<HTMLInputElement>(null);
   const [categories, set_categories] = useState<Array<{ id: number; name: string; slug: string; }>>();
-  const [select_category, set_select_category] = useState<number>();
   const [posts, set_posts] = useState<Array<IPostModel>>();
-  const [posts_count, set_posts_count] = useState<number>()
+  const [posts_count, set_posts_count] = useState<number>();
+  const [uploaded_file, set_uploaded_file] = useState<any>();
+  const [open_add_post, set_open_add_post] = useState<boolean>(false);
+  const [image, set_image] = useState<string>();
+  const [image_required, set_image_required] = useState<string>();
 
   useEffect(() => {
 
@@ -48,29 +52,26 @@ export const useContainer = (): IModel => {
     })
   }
 
-  const handler_select_category = (id: number) => {
-    set_select_category(id)
-    if (id) {
-      axios_config.get('/api/post/crud/').then((result) => {
-        set_posts_count(result.data.count)
-        const filter_results = result.data.results.filter((value: any) => value.category.id === id)
-
-        set_posts(filter_results)
-      }).catch((error) => {
-        // handle error
-        console.log(error)
-      })
-    }
+  const get_posts = () => {
+    axios_config.get('/api/post/crud/').then((result) => {
+      set_posts_count(result.data.count)
+      set_posts(result.data.results)
+    }).catch((error) => {
+      // handle error
+      console.log(error)
+    })
   }
+
+  useEffect(() => {
+    get_posts()
+  }, [])
 
   const onChangePagination = (page: number) => {
     if (page - 1 === 0) {
-      handler_select_category(select_category!)
+      get_posts()
     } else {
       axios_config.get(`/api/post/crud/?limit=5&offset=${(page - 1) * 5}`).then((result) => {
-        const filter_results = result.data.results.filter((value: any) => value.category.id === select_category)
-
-        set_posts(filter_results)
+        set_posts(result.data.results)
       }).catch((error) => {
         // handle error
         console.log(error)
@@ -78,29 +79,12 @@ export const useContainer = (): IModel => {
     }
 
   }
-
-
-  const inputRef = useRef<HTMLInputElement>(null)
-
-  const [uploaded_file, set_uploaded_file] = useState<any>();
-
-  const [open_add_post, set_open_add_post] = useState<boolean>(false);
-
-  const [image, set_image] = useState<string>();
-
-  const [image_required, set_image_required] = useState<string>();
 
   const handler_open_close_modal = () => {
     set_open_add_post(!open_add_post)
   }
 
-  useEffect(() => {
-    if (open_add_post === false) {
-      formik.resetForm()
-      set_uploaded_file(undefined)
-      set_image(undefined)
-    }
-  }, [open_add_post])
+
 
   const initial_values: IFormModel = {
     title: "",
@@ -128,7 +112,7 @@ export const useContainer = (): IModel => {
       formData.append('image', imageFile);
 
       axios_config.post('/api/post/crud/', formData).then((result) => {
-        handler_select_category(Number(values.category))
+        get_posts()
         toast.success('Post is created successfully', {
           position: toast.POSITION.TOP_RIGHT
         })
@@ -157,10 +141,6 @@ export const useContainer = (): IModel => {
     category: formik.submitCount || formik.touched.category ? formik.errors.category : "",
   };
 
-  const go_to_signin = () => {
-    navigator('/signin')
-  }
-
   const handleonChnageUploadFile = (e: any) => {
     set_uploaded_file(e.target.files[0])
     set_image(URL.createObjectURL(e.target.files[0]))
@@ -175,13 +155,21 @@ export const useContainer = (): IModel => {
       toast.success('Post is deleted successfully', {
         position: toast.POSITION.TOP_RIGHT
       })
-      handler_select_category(select_category!)
-    }).catch(()=>{
+      get_posts()
+    }).catch(() => {
       toast.error('Please try again', {
         position: toast.POSITION.TOP_RIGHT
       })
     })
   }
+
+  useEffect(() => {
+    if (open_add_post === false) {
+      formik.resetForm()
+      set_uploaded_file(undefined)
+      set_image(undefined)
+    }
+  }, [open_add_post, formik])
 
   return {
     user_full_name: {
@@ -190,8 +178,6 @@ export const useContainer = (): IModel => {
     },
     action_logout,
     categories,
-    select_category,
-    handler_select_category,
     posts,
     onChangePagination,
     posts_count,
@@ -202,7 +188,6 @@ export const useContainer = (): IModel => {
     form_data: formik.values,
     form_errors: form_errors,
     handleChange: formik.handleChange,
-    go_to_signin,
     inputRef,
     handleonChnageUploadFile,
     image,
