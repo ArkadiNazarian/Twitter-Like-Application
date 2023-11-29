@@ -9,6 +9,7 @@ import { useUserDetailsStore } from './Zustand/user-details';
 import { useAccessTokenStore } from './Zustand/access-token';
 import { useEffect } from 'react';
 import { axios_config } from './Axios/setup-axions';
+import { NavBar } from './Components/navBar/index';
 
 function App() {
 
@@ -30,8 +31,12 @@ function App() {
 
   return (
     <BrowserRouter>
+      {
+        access_token_store.token && <NavBar />
+      }
       <Routes>
         <Route element={<PrivateRoutes />}>
+
           {
             app_routes.private_routes.map((value, index) => (
               <Route path={value.path} element={value.component} key={index} />

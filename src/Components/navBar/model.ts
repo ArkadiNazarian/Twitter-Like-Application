@@ -1,17 +1,11 @@
 import { FormikErrors } from "formik";
 
 export interface IModel {
+    action_logout: () => void;
     user_full_name: {
         first_name: string;
         last_name: string;
     };
-    action_logout: () => void;
-    categories?: Array<{ id: number; name: string; slug: string; }>;
-    select_category?: number;
-    handler_select_category: (id: number) => void;
-    posts?: Array<IPostModel>;
-    onChangePagination: (page: number) => void;
-    posts_count?: number;
     handler_open_close_modal: () => void;
     open_add_post: boolean;
     set_open_add_post: (value: boolean) => void;
@@ -24,23 +18,6 @@ export interface IModel {
     handleonChnageUploadFile: (e: any) => void;
     image?: string;
     image_required?: string;
-}
-
-export interface IPostModel {
-    id: number;
-    image: string;
-    title: string;
-    description: string;
-    author: {
-        id: number;
-        full_name: string;
-    }
-    category: {
-        id: number;
-        name: string;
-        slug: string;
-    }
-    
 }
 
 export interface IFormModel {
