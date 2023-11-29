@@ -55,15 +55,6 @@ export const View = (props: IModel) => (
                     </div>
 
                     <div className="tw-flex tw-flex-col tw-mb-[2vh] ">
-                        {/* <input
-                            type="text"
-                            name="category"
-                            value={props.form_data.category}
-                            onChange={props.handleChange}
-
-                            placeholder="Category"
-                            className={`${props.form_errors.category ? "tw-border-custom_dark_red tw-outline-custom_dark_red tw-bg-custom_white tw-placeholder-custom_dark_red" : "tw-border-custom_light_blue tw-outline-custom_blue"} tw-border-2 tw-py-[0.7vh] tw-px-[0.893vw] tw-rounded-2xl tw-w-[17.867vw]`}
-                        /> */}
                         <Dropdown>
                             <InputLabel id="select-label">Age</InputLabel>
                             <Select
