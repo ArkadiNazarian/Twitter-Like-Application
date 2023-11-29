@@ -1,4 +1,6 @@
-import { Signup } from "../Modules/account/signup";
+import { Dashboard } from "../Modules/dashboard";
+import { SignIn } from "../Modules/signin";
+import { Signup } from "../Modules/signup";
 import { route_names } from "./route-names";
 
 
@@ -10,10 +12,10 @@ export const routes = () => {
             path: app_routes.signup_path,
             component: <Signup />
         },
-        // {
-        //     path: app_routes.signin_path,
-        //     component: <SignIn />
-        // },
+        {
+            path: app_routes.signin_path,
+            component: <SignIn />
+        },
         // {
         //     path: app_routes.forgot_password,
         //     component: <ForgotPassword />
@@ -24,19 +26,19 @@ export const routes = () => {
         // }
     ];
 
-    const private_routes = [{}
-        // {
-        //     path: app_routes.dashboard,
-        //     component: <Dashboard />
-        // },
+    const private_routes = [
+        {
+            path: app_routes.dashboard,
+            component: <Dashboard />
+        },
         // {
         //     path: app_routes.view_account,
         //     component: <ViewAccount />
         // },
-        // {
-        //     path: app_routes.default_path,
-        //     component: <Dashboard />
-        // },
+        {
+            path: app_routes.default_path,
+            component: <Dashboard />
+        },
         // {
         //     path: app_routes.edit_account,
         //     component: <EditAccount />

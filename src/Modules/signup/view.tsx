@@ -1,4 +1,4 @@
-import { PersonIcon } from "../../../Icons/person-icon";
+import { PersonIcon } from "../../Icons/person-icon";
 import { IFormModel } from "./model";
 
 

@@ -1,6 +1,6 @@
 export const route_names = () => {
-    const signin_path = "/auth/signin";
-    const signup_path = "/auth/signup";
+    const signin_path = "/signin";
+    const signup_path = "/signup";
     const default_path = "*";
     const dashboard = "/dashboard";
 

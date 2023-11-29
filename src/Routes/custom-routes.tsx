@@ -1,22 +1,18 @@
-// import { useSelector } from 'react-redux';
-// import { Outlet, Navigate } from 'react-router-dom';
-// import { getAccountSelector } from '../Modules/module-account/signin/redux/signin-reducer';
-// import { route_names } from './route-names';
+import { Outlet, Navigate } from 'react-router-dom';
+import { route_names } from './route-names';
+import { useAccessTokenStore } from '../Zustand/access-token';
 
-// export const PrivateRoutes = () => {
+export const PrivateRoutes = () => {
 
-//     const 
-//     const route = route_names();
+    const access_token_store = useAccessTokenStore();
+    const route = route_names();
 
-//     return user_data.user?._id ? <Outlet /> : <Navigate to={route.signin_path} />
-// }
+    return access_token_store.token ? <Outlet /> : <Navigate to={route.signin_path} />
+}
 
 export const Routes = () => {
-    // const user_data = useSelector(getAccountSelector);
-    // const route = route_names();
+    const access_token_store = useAccessTokenStore();
+    const route = route_names();
 
-    // return user_data.user?._id ? <Navigate to={route.dashboard} /> : <Outlet />
-    return{
-        
-    }
+    return access_token_store.token ? <Navigate to={route.dashboard} /> : <Outlet />
 }

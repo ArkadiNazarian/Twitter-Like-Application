@@ -3,7 +3,7 @@ import { IFormModel, IModel } from "./model";
 import *as yup from 'yup';
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import { route_names } from "../../../Routes/route-names";
+import { route_names } from "../../Routes/route-names";
 import { useRef, useState } from "react";
 import { toast } from "react-toastify";
 
@@ -25,7 +25,7 @@ export const useContainer = (): IFormModel => {
 
     const validation_schema = yup.object().shape({
         email: yup.string().email("Invalid email format").required("This field is required"),
-        password: yup.string().min(6, "Too short").required("This field is required"),
+        password: yup.string().min(6, "Too short").required("This field is required").matches(/^(?=.*[A-Z])/, 'Must contain at least one uppercase character').matches(/^(?=.*[a-z])/, 'Must contain at least one lowercase character').matches(/^(?=.*[0-9])/, 'Must contain at least one number'),
         first_name: yup.string().required("This field is required"),
         last_name: yup.string().required("This field is required"),
         confirm_password: yup.string().oneOf([yup.ref('password')], 'Passwords must match').required("This field is required"),
@@ -43,7 +43,6 @@ export const useContainer = (): IFormModel => {
         axios.post('https://rn-api.codebnb.me/api/user/sign-up/', formData).then((result) => {
             navigator('/signin')
         }).catch((error)=>{
-            console.log(error)
             toast.error('Please try again', {
                 position: toast.POSITION.TOP_RIGHT
             })
