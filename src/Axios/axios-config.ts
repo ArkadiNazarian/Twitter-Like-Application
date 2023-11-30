@@ -25,8 +25,7 @@ export default function setupAxios(axios_config: any, access_token: string, refr
     })
 
       .then((tokenRefreshResponse: any) => {
-        console.log(tokenRefreshResponse)
-        const { access, resfresh } = tokenRefreshResponse?.data;
+        const { access, refresh } = tokenRefreshResponse?.data;
 
         const new_access_token = {
           state: {
@@ -36,7 +35,7 @@ export default function setupAxios(axios_config: any, access_token: string, refr
 
         const new_refresh_token = {
           state: {
-            refresh_token:resfresh
+            refresh_token:refresh
           }
         }
 
