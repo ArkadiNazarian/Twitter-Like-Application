@@ -40,10 +40,11 @@ export const View = (props: IFormModel) => (
                     </div>
 
                 </div>
-                <div className="tw-flex tw-items-center tw-mr-[14.5vw] tw-gap-[0.5vw] tw-mb-[2vh]">
+                <div className="tw-flex tw-items-center tw-gap-[0.5vw] tw-mb-[2vh] tw-w-full tw-ml-[5vw]">
                     <input
                         type='checkbox'
                         className="tw-bg-custom_light_blue"
+                        // there isn't provided route for remember me
                     />
                     <p>Remember me</p>
                 </div>

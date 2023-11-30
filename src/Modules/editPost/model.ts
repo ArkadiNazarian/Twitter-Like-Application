@@ -27,6 +27,6 @@ export interface IModel {
     inputRef: any;
     handleonChnageUploadFile: (e: any) => void;
     image?: string;
-    image_required?: string;
     categories?: Array<{ id: number; name: string; slug: string; }>;
+    go_to_dashboard: () => void;
 }

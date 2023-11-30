@@ -39,8 +39,7 @@ export const View = (props: IModel) => (
                         }
                     </div>
                     <div className="tw-flex tw-flex-col">
-                        <input
-                            type="text"
+                        <textarea
                             name="description"
                             value={props.form_data.description}
                             onChange={props.handleChange}

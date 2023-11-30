@@ -2,16 +2,13 @@ import { InputLabel, MenuItem, Select } from "@mui/material";
 import { IModel } from "./model";
 import { Dropdown } from "../../Components/dropdown/Dropdown";
 
-export const View = (props:IModel) => (
+export const View = (props: IModel) => (
     <div>
         <form className="tw-ml-[2.26vw] tw-flex tw-justify-center  tw-gap-[3vh] tw-flex-col tw-items-center">
             <div className=" tw-flex tw-flex-col tw-items-center">
                 <p className="tw-mt-[2vh] tw-text-custom_light_blue tw-text-4xl tw-mb-[4vh]">Edit post</p>
                 {
-                    props.image ? <div ><img src={props.image} alt='image' className="tw-w-[10.51vw] tw-h-[10.51vw]" /></div> : <div ><img src={props.post_details?.image} className={`tw-w-[10.51vw] tw-h-[10.51vw] ${props.image_required && "tw-border-custom_dark_red tw-border-2 tw-rounded-2xl"}`} onClick={() => props.inputRef.current.click()} />
-                        {
-                            props.image_required && <p className="tw-text-custom_dark_red">This field is required</p>
-                        }
+                    props.image ? <div ><img src={props.image} alt='image' className="tw-w-[10.51vw] tw-h-[10.51vw]" /></div> : <div ><img src={props.post_details?.image} className={"tw-w-[10.51vw] tw-h-[10.51vw]"} onClick={() => props.inputRef.current.click()} />
                     </div>
                 }
 
@@ -31,8 +28,7 @@ export const View = (props:IModel) => (
                 }
             </div>
             <div className="tw-flex tw-flex-col">
-                <input
-                    type="text"
+                <textarea
                     name="description"
                     value={props.form_data.description}
                     onChange={props.handleChange}
@@ -68,9 +64,10 @@ export const View = (props:IModel) => (
                     props.form_errors.category && <p className="tw-text-custom_dark_red">{props.form_errors.category}</p>
                 }
             </div>
-
-            <button type="button" className="tw-bg-custom_light_blue tw-text-white tw-py-[1vh] tw-px-[3.678vw] tw-rounded-lg" onClick={props.action_submit}>Save</button>
-
+            <div className="tw-flex tw-flex-row tw-gap-[2vw]">
+                <button type="button" className="tw-bg-white tw-border-custom_light_blue tw-border-2 tw-text-custom_light_blue tw-py-[1vh] tw-px-[3.678vw] tw-rounded-lg" onClick={()=>props.go_to_dashboard()}>Back</button>
+                <button type="button" className="tw-bg-custom_light_blue tw-text-white tw-py-[1vh] tw-px-[3.678vw] tw-rounded-lg" onClick={props.action_submit}>Save</button>
+            </div>
         </form>
         <input
             className="tw-hidden"

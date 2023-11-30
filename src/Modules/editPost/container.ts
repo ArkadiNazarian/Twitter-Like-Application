@@ -15,7 +15,6 @@ export const useContainer = (): IModel => {
     const inputRef = useRef<HTMLInputElement>(null)
     const [uploaded_file, set_uploaded_file] = useState<any>();
     const [image, set_image] = useState<string>();
-    const [image_required, set_image_required] = useState<string>();
     const [categories, set_categories] = useState<Array<{ id: number; name: string; slug: string; }>>();
 
     const handleonChnageUploadFile = (e: any) => {
@@ -91,7 +90,7 @@ export const useContainer = (): IModel => {
                     toast.success('Post is updated successfully', {
                         position: toast.POSITION.TOP_RIGHT
                     })
-                   navigate('/dashboard')
+                    navigate('/dashboard')
                 }).catch((error) => {
                     toast.error('Please try again', {
                         position: toast.POSITION.TOP_RIGHT
@@ -131,6 +130,10 @@ export const useContainer = (): IModel => {
         })
     }, [])
 
+    const go_to_dashboard = () => {
+        navigate('/dashboard')
+    }
+
     return {
         action_submit: formik.handleSubmit,
         form_data: formik.values,
@@ -139,8 +142,8 @@ export const useContainer = (): IModel => {
         inputRef,
         handleonChnageUploadFile,
         image,
-        image_required,
         categories,
-        post_details
+        post_details,
+        go_to_dashboard
     }
 }
