@@ -8,7 +8,7 @@ export const View = (props: IModel) => (
             <div className=" tw-flex tw-flex-col tw-items-center">
                 <p className="tw-mt-[2vh] tw-text-custom_light_blue tw-text-4xl tw-mb-[4vh]">Edit post</p>
                 {
-                    props.image ? <div ><img src={props.image} alt='image' className="tw-w-[10.51vw] tw-h-[10.51vw]" /></div> : <div ><img src={props.post_details?.image} className={"tw-w-[10.51vw] tw-h-[10.51vw]"} onClick={() => props.inputRef.current.click()} />
+                    props.image ? <div ><img src={props.image} alt='image' className="tw-w-[10.51vw] tw-h-[10.51vw]" /></div> : <div ><img alt='image' src={props.post_details?.image} className={"tw-w-[10.51vw] tw-h-[10.51vw]"} onClick={() => props.inputRef.current.click()} />
                     </div>
                 }
 
@@ -44,13 +44,13 @@ export const View = (props: IModel) => (
 
             <div className="tw-flex tw-flex-col tw-mb-[2vh] ">
                 <Dropdown>
-                    <InputLabel id="select-label">Category</InputLabel>
+                    <InputLabel id="select-label" >Category</InputLabel>
                     <Select
                         labelId="select-label"
                         id="select"
                         value={props.form_data.category}
                         name="category"
-                        className="tw-w-[18vw] tw-rounded-2xl"
+                        className="tw-w-[18vw] tw-rounded-2xl tw-mt-[1vh]"
                         onChange={props.handleChange}
                     >
                         {

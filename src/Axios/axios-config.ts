@@ -41,8 +41,7 @@ export default function setupAxios(axios_config: any, access_token: string, refr
 
         localStorage.setItem("arkadi-project-refresh-token", JSON.stringify(new_refresh_token));
         localStorage.setItem("arkadi-project-access-token", JSON.stringify(new_access_token));
-        // access_token_store.set_token(accessToken)
-        // refresh_token_store.set_refresh_token(refreshToken)
+
         failedRequest.response.config.headers["authorization"] =
           `JWT ${access}`;
         return Promise.resolve();

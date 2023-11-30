@@ -54,7 +54,7 @@ export const useContainer = (): IModel => {
         })
     }
 
-    const onClick_post=()=>{
+    const onClick_post = () => {
         navigate('/dashboard')
     }
 

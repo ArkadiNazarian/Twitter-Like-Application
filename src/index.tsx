@@ -11,13 +11,8 @@ import { useAccessTokenStore } from './Zustand/access-token';
 import { useRefreshTokenStore } from './Zustand/refresh-token';
 
 
-
-// const access_token = JSON.parse(localStorage.getItem('arkadi-project-access-token')!);
-// const refresh_token = JSON.parse(localStorage.getItem('arkadi-project-refresh-token')!);
-
 const access_token = useAccessTokenStore.getState()
 const refresh_token = useRefreshTokenStore.getState()
-// console.log(token.token)
 
 
 setupAxios(axios_config, access_token.token, refresh_token.refresh_token)
