@@ -1,14 +1,6 @@
 import createAuthRefreshInterceptor from "axios-auth-refresh";
-import { useAccessTokenStore } from "../Zustand/access-token";
-import { useRefreshTokenStore } from "../Zustand/refresh-token";
 
 export default function setupAxios(axios: any, access_token: string, refresh_token: string) {
-
-  // const access_token_store = useAccessTokenStore();
-  // const refresh_token_store = useRefreshTokenStore();
-
-
-
   axios.interceptors.request.use(
     (config: any) => {
 

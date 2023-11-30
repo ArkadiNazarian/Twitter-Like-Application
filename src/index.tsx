@@ -7,12 +7,20 @@ import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer } from 'react-toastify';
 import setupAxios from './Axios/axios-config';
 import { axios_config } from './Axios/setup-axions';
+import { useAccessTokenStore } from './Zustand/access-token';
+import { useRefreshTokenStore } from './Zustand/refresh-token';
 
 
-const access_token = JSON.parse(localStorage.getItem('arkadi-project-access-token')!);
-const refresh_token = JSON.parse(localStorage.getItem('arkadi-project-refresh-token')!);
 
-setupAxios(axios_config, access_token.state.token, refresh_token.state.refresh_token)
+// const access_token = JSON.parse(localStorage.getItem('arkadi-project-access-token')!);
+// const refresh_token = JSON.parse(localStorage.getItem('arkadi-project-refresh-token')!);
+
+const access_token = useAccessTokenStore.getState()
+const refresh_token = useRefreshTokenStore.getState()
+// console.log(token.token)
+
+
+setupAxios(axios_config, access_token.token, refresh_token.refresh_token)
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement

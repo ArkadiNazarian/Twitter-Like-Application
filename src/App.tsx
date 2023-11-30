@@ -14,16 +14,15 @@ function App() {
   const access_token_store = useAccessTokenStore();
   const user_details_store = useUserDetailsStore();
 
-  useEffect(() => {
-    if (access_token_store.token) {
-      axios_config.get('/api/user/me/').then((result) => {
-        user_details_store.set_user_details(result.data.email, result.data.id, result.data.image, result.data.first_name, result.data.last_name)
-      }).catch((error) => {
-        // error handle
-        console.log(error)
-      })
-    }
-  }, [access_token_store.token, user_details_store])
+  // useEffect(() => {
+  //   if (!access_token_store.token) return
+  //     axios_config.get('/api/user/me/').then((result) => {
+  //       user_details_store.set_user_details(result.data.email, result.data.id, result.data.image, result.data.first_name, result.data.last_name)
+  //     }).catch((error) => {
+  //       // error handle
+  //       console.log(error)
+  //     })
+  // }, [access_token_store])
 
   return (
     <BrowserRouter>

@@ -8,6 +8,9 @@ import { useState } from "react";
 import { toast } from "react-toastify";
 import { useAccessTokenStore } from "../../Zustand/access-token";
 import { useRefreshTokenStore } from "../../Zustand/refresh-token";
+import setupAxios from "../../Axios/axios-config";
+import { axios_config } from "../../Axios/setup-axions";
+import { useUserDetailsStore } from "../../Zustand/user-details";
 
 export const useContainer = (): IFormModel => {
 
@@ -15,6 +18,7 @@ export const useContainer = (): IFormModel => {
     const app_routes = route_names();
     const access_token_store = useAccessTokenStore();
     const refresh_token_store = useRefreshTokenStore();
+    const user_details_store = useUserDetailsStore();
 
     const initial_values: IModel = {
         email: "",
@@ -40,6 +44,18 @@ export const useContainer = (): IFormModel => {
         }).then((result) => {
             access_token_store.set_token(result.data.token.access)
             refresh_token_store.set_refresh_token(result.data.token.refresh)
+            setupAxios(axios_config, result.data.token.access, result.data.token.refresh)
+            axios({
+                method: "GET",
+                url: "https://rn-api.codebnb.me/api/user/me/",
+                headers: {
+                    Authorization: `JWT ${result.data.token.access}`
+                }
+            }).then((result) => {
+                user_details_store.set_user_details(result.data.email, result.data.id, result.data.image, result.data.first_name, result.data.last_name)
+            }).catch((error) => {
+                console.log(error)
+            })
             navigator('/dashboard')
         }).catch(() => {
             toast.error('Wrong password or email', {

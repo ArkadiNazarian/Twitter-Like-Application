@@ -4,6 +4,8 @@ import { useAccessTokenStore } from "../../Zustand/access-token";
 import { useRefreshTokenStore } from "../../Zustand/refresh-token";
 import { useUserDetailsStore } from "../../Zustand/user-details";
 import { IModel } from "./model";
+import { useEffect } from "react";
+import axios from "axios";
 
 export const useContainer = (): IModel => {
 
@@ -11,6 +13,23 @@ export const useContainer = (): IModel => {
     const user_details_store = useUserDetailsStore();
     const refresh_token_store = useRefreshTokenStore();
     const access_token_store = useAccessTokenStore();
+
+    useEffect(() => {
+        
+        axios({
+            method: "GET",
+            url: "https://rn-api.codebnb.me/api/user/me/",
+            headers: {
+                Authorization: `JWT ${access_token_store.token}`
+            }
+        }).then((result) => {
+            user_details_store.set_user_details(result.data.email, result.data.id, result.data.image, result.data.first_name, result.data.last_name)
+        }).catch((error) => {
+            console.log(error)
+        })
+        
+    }, [])
+    
 
 
     const action_logout = () => {
@@ -32,7 +51,7 @@ export const useContainer = (): IModel => {
         user_profile_detials: {
             first_name: user_details_store.first_name,
             last_name: user_details_store.last_name,
-            image:user_details_store.image
+            image: user_details_store.image
         }
     }
 }
