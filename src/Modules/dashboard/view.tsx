@@ -88,7 +88,7 @@ export const View = (props: IModel) => (
 
             </div>
         </Modal>
-        <p className="tw-text-custom_blue tw-text-2xl tw-cursor-pointer" onClick={() => props.handler_open_close_modal()}>+Add post</p>
+        <button type="button" className="tw-text-white tw-font-bold tw-bg-custom_light_blue tw-rounded-lg  tw-px-[2.627vw] tw-py-[1vh] tw-cursor-pointer" onClick={() => props.handler_open_close_modal()}>+Add</button>
         <div className="tw-flex tw-mt-[4vh] tw-gap-[4vw]">
             <div className="tw-flex tw-flex-row tw-flex-wrap tw-gap-[2vw]">
                 {
