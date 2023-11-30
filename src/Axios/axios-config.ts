@@ -25,17 +25,17 @@ export default function setupAxios(axios_config: any, access_token: string, refr
     })
 
       .then((tokenRefreshResponse: any) => {
-        const { accessToken, refreshToken } = tokenRefreshResponse?.data;
+        const { access, resfresh } = tokenRefreshResponse?.data;
 
         const new_access_token = {
           state: {
-            token:accessToken
+            token:access
           }
         }
 
         const new_refresh_token = {
           state: {
-            refresh_token:refreshToken
+            refresh_token:resfresh
           }
         }
 
@@ -44,7 +44,7 @@ export default function setupAxios(axios_config: any, access_token: string, refr
         // access_token_store.set_token(accessToken)
         // refresh_token_store.set_refresh_token(refreshToken)
         failedRequest.response.config.headers["authorization"] =
-          "JWT" + accessToken.token;
+          "JWT" + access.token;
         return Promise.resolve();
       })
       .catch(() => {
