@@ -1,7 +1,8 @@
 import createAuthRefreshInterceptor from "axios-auth-refresh";
+import axios from "axios";
 
-export default function setupAxios(axios: any, access_token: string, refresh_token: string) {
-  axios.interceptors.request.use(
+export default function setupAxios(axios_config: any, access_token: string, refresh_token: string) {
+  axios_config.interceptors.request.use(
     (config: any) => {
 
       if (access_token) {
@@ -13,17 +14,7 @@ export default function setupAxios(axios: any, access_token: string, refresh_tok
     (err: any) => Promise.reject(err)
   );
 
-  axios.interceptors.response.use((response: any) => {
-    return response;
-  }, (error: any) => {
-    if (error.response.status === 401) {
-      refreshAuthLogic(error.config)
-    }
-    return error;
-  })
-
-
-  const refreshAuthLogic = (failedRequest: any) => {
+  const refreshAuthLogic = async (failedRequest: any) => {
     return axios({
       method: "Post",
       url: `https://rn-api.codebnb.me/api/user/refresh/`,
@@ -36,8 +27,20 @@ export default function setupAxios(axios: any, access_token: string, refresh_tok
       .then((tokenRefreshResponse: any) => {
         const { accessToken, refreshToken } = tokenRefreshResponse?.data;
 
-        localStorage.setItem("arkadi-project-refresh-token", refreshToken);
-        localStorage.setItem("arkadi-project-access-token", accessToken);
+        const new_access_token = {
+          state: {
+            token:accessToken
+          }
+        }
+
+        const new_refresh_token = {
+          state: {
+            refresh_token:refreshToken
+          }
+        }
+
+        localStorage.setItem("arkadi-project-refresh-token", JSON.stringify(new_refresh_token));
+        localStorage.setItem("arkadi-project-access-token", JSON.stringify(new_access_token));
         // access_token_store.set_token(accessToken)
         // refresh_token_store.set_refresh_token(refreshToken)
         failedRequest.response.config.headers["authorization"] =

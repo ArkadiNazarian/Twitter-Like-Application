@@ -16,15 +16,7 @@ export const routes = () => {
         {
             path: app_routes.signin_path,
             component: <SignIn />
-        },
-        // {
-        //     path: app_routes.forgot_password,
-        //     component: <ForgotPassword />
-        // },
-        // {
-        //     path: app_routes.reset_password,
-        //     component: <ResetPassword />
-        // }
+        }
     ];
 
     const private_routes = [
@@ -32,30 +24,14 @@ export const routes = () => {
             path: app_routes.dashboard,
             component: <Dashboard />
         },
-        // {
-        //     path: app_routes.view_account,
-        //     component: <ViewAccount />
-        // },
         {
             path: app_routes.default_path,
             component: <Dashboard />
         },
         {
-            path: app_routes.show_post,
+            path: app_routes.edit_post,
             component: <EditPost />
-        },
-        // {
-        //     path: app_routes.products,
-        //     component: <Products />
-        // },
-        // {
-        //     path: app_routes.view_product,
-        //     component: <ViewProduct />
-        // },
-        // {
-        //     path: app_routes.view_card,
-        //     component: <Card />
-        // }
+        }
     ];
 
 

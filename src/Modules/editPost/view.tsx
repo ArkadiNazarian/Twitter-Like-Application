@@ -44,7 +44,7 @@ export const View = (props: IModel) => (
 
             <div className="tw-flex tw-flex-col tw-mb-[2vh] ">
                 <Dropdown>
-                    <InputLabel id="select-label">Age</InputLabel>
+                    <InputLabel id="select-label">Category</InputLabel>
                     <Select
                         labelId="select-label"
                         id="select"
