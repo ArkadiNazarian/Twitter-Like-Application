@@ -25,7 +25,6 @@ export const useContainer = (): IModel => {
     useEffect(() => {
         if (id) {
             axios_config.get(`/api/post/crud/${id}/`).then((result) => {
-                console.log(result)
                 set_post_details(result.data)
 
             }).catch((error) => {
