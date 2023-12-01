@@ -86,7 +86,7 @@ export const View = (props: IModel) => (
                             name="confirm_password"
                             value={props.form_data.confirm_password}
                             onChange={props.handleChange}
-                            placeholder="Custom password"
+                            placeholder="Confirm password"
                             className={`${props.form_errors.confirm_password ? "tw-border-custom_dark_red tw-outline-custom_dark_red tw-bg-custom_white tw-placeholder-custom_dark_red" : "tw-border-custom_light_blue tw-outline-custom_blue"} tw-border-2 tw-py-[0.7vh] tw-px-[0.893vw] tw-rounded-2xl tw-w-[17.867vw]`}
                         />
                         {
