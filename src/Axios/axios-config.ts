@@ -1,5 +1,7 @@
 import createAuthRefreshInterceptor from "axios-auth-refresh";
 import axios from "axios";
+import { useAccessTokenStore } from "../Zustand/access-token";
+import { useRefreshTokenStore } from "../Zustand/refresh-token";
 
 export default function setupAxios(axios_config: any, access_token: string, refresh_token: string) {
   axios_config.interceptors.request.use(
@@ -47,7 +49,9 @@ export default function setupAxios(axios_config: any, access_token: string, refr
         return Promise.resolve();
       })
       .catch(() => {
-
+        // log out
+        useAccessTokenStore.setState({ token: '' })
+        useRefreshTokenStore.setState({ refresh_token: '' })
         return Promise.reject();
       });
   };
