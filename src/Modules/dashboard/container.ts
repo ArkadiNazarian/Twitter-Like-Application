@@ -64,7 +64,7 @@ export const useContainer = (): IModel => {
 
   useEffect(() => {
     get_posts()
-  }, [])
+  }, [access_token_store.token])
 
   const onChangePagination = (page: number) => {
     if (page - 1 === 0) {

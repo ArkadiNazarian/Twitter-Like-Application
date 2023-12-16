@@ -4,11 +4,19 @@ import { routes } from './Routes/routes';
 import { Routes as PublicRoutes, PrivateRoutes } from './Routes/custom-routes';
 import { useAccessTokenStore } from './Zustand/access-token';
 import { NavBar } from './Components/navBar/index';
+import { useEffect } from 'react';
+import setupAxios from './Axios/axios-config';
+import { axios_config } from './Axios/setup-axions';
+import { useRefreshTokenStore } from './Zustand/refresh-token';
 
 function App() {
 
   const app_routes = routes();
   const access_token_store = useAccessTokenStore();
+
+  useEffect(() => {
+    setupAxios(axios_config, useRefreshTokenStore.getState().refresh_token)
+  }, [localStorage.getItem("arkadi-project-access-token")])
 
   return (
     <BrowserRouter>

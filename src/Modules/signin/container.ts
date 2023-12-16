@@ -43,7 +43,7 @@ export const useContainer = (): IFormModel => {
         }).then((result) => {
             access_token_store.set_token(result.data.token.access)
             refresh_token_store.set_refresh_token(result.data.token.refresh)
-            setupAxios(axios_config, result.data.token.access, result.data.token.refresh)
+            setupAxios(axios_config, result.data.token.refresh)
             axios({
                 method: "GET",
                 url: "https://rn-api.codebnb.me/api/user/me/",

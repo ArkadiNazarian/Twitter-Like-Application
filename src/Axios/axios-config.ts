@@ -3,12 +3,13 @@ import axios from "axios";
 import { useAccessTokenStore } from "../Zustand/access-token";
 import { useRefreshTokenStore } from "../Zustand/refresh-token";
 
-export default function setupAxios(axios_config: any, access_token: string, refresh_token: string) {
+export default function setupAxios(axios_config: any, refresh_token: string) {
   axios_config.interceptors.request.use(
     (config: any) => {
-
-      if (access_token) {
-        config.headers.authorization = `JWT ${access_token}`;
+      const access = useAccessTokenStore.getState().token
+      if (access) {
+        useAccessTokenStore.getState().set_token(access)
+        config.headers.authorization = `JWT ${access}`;
       }
 
       return config;
@@ -41,8 +42,10 @@ export default function setupAxios(axios_config: any, access_token: string, refr
           }
         }
 
-        localStorage.setItem("arkadi-project-refresh-token", JSON.stringify(new_refresh_token));
-        localStorage.setItem("arkadi-project-access-token", JSON.stringify(new_access_token));
+        // localStorage.setItem("arkadi-project-refresh-token", JSON.stringify(new_refresh_token));
+        // localStorage.setItem("arkadi-project-access-token", JSON.stringify(new_access_token));
+        useAccessTokenStore.getState().set_token(access)
+        useRefreshTokenStore.getState().set_refresh_token(refresh)
 
         failedRequest.response.config.headers["authorization"] =
           `JWT ${access}`;
