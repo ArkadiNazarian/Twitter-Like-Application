@@ -1,6 +1,6 @@
 # Twitter-Like Application
 
-This project is a Twitter-like application where users can add, delete, edit posts, and also review them. The application was built using React with TypeScript, Zustand for state management, Tailwind CSS for styling, and it also handles the refresh and access token.
+This project is a Twitter-like application where users can add, delete, edit posts, and also review them. The application was built using React.js with TypeScript, Zustand for state management, Tailwind CSS for styling, and it also handles the refresh and access token.
 
 ## Features
 
@@ -11,31 +11,29 @@ This project is a Twitter-like application where users can add, delete, edit pos
 
 ## Technologies Used
 
-- React
+- React.js
 - TypeScript
 - Zustand
 - Tailwind CSS
+- MUI
+- Axios
+- axios-auth-refresh
 
 ## How to Run the Application
 
-1. Clone the repository:
-
-Bash
-
-git clone https://github.com/your-repo/twitter-like-app.git
-
+1. Clone the repository
 2. Install dependencies:
 
 Bash
 
 cd twitter-like-app
-npm install
+yarn install
 
 3. Start the development server:
 
 Bash
 
-npm start
+yarn start
 
 4. Open your browser and navigate to http://localhost:3000 to view the application.
 
