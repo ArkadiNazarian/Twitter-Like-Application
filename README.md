@@ -37,10 +37,3 @@ yarn start
 
 4. Open your browser and navigate to http://localhost:3000 to view the application.
 
-## Additional Information
-
-- Make sure to handle the refresh and access token properly to ensure secure authentication and authorization.
-- Feel free to customize the application further by adding new features or improving existing ones.
-
-Enjoy using the Twitter-like application! If you have any questions or feedback, please feel free to reach out.
-
